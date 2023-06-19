@@ -1,17 +1,20 @@
 import axios from "axios"
 
-const GPT_API_KEY = process.env.GPT_SECRET
+const initAxios = () => {
+  const GPT_API_SECRET = process.env.GPT_SECRET
+  const gptClient = axios.create({
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${GPT_API_SECRET}`,
+    },
+  })
+  
+  const client = axios.create()
 
-const axiosGptClient = axios.create({
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${GPT_API_KEY}`,
-  },
-})
-
-const axiosClient = axios.create()
-
-export {
-  axiosGptClient,
-  axiosClient,
+  return {
+    gptClient,
+    client,
+  }
 }
+
+export default initAxios
