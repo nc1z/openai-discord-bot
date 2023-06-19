@@ -33,6 +33,7 @@ const registerEventHandlers = (client: Client<boolean>) => {
         .setPlaceholder('Enter some text!')
         .setStyle(TextInputStyle.Short)
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const firstActionRow: any = new ActionRowBuilder().addComponents(confessionInput)
 
       modal.addComponents(firstActionRow)
@@ -44,7 +45,7 @@ const registerEventHandlers = (client: Client<boolean>) => {
   client.on("messageCreate", async (message: Message) => {
     const maintenanceMode = process.env.MAINTENANCE_MODE
     const prompt = message.content
-    let startIndex = prompt.indexOf(">") + 2
+    const startIndex = prompt.indexOf(">") + 2
     let promptBody = prompt.slice(startIndex)
     console.log(`${message.author.username}: ${promptBody}`)
 
