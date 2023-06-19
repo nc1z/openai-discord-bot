@@ -10,6 +10,7 @@ import {
 } from 'discord.js'
 import { UserID } from '../types/enum/User'
 import ErrorMessage from '../types/enum/ErrorMessage'
+import handlePrompt from './handlePrompt'
 
 const registerEventHandlers = (client: Client<boolean>) => {
   client.on('debug', console.log)
@@ -66,7 +67,7 @@ const registerEventHandlers = (client: Client<boolean>) => {
       return
     }
 
-    // TODO: handle prompt here
+    handlePrompt(promptBody, message)
   })
 }
 
