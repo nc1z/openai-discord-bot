@@ -1,10 +1,7 @@
 import { Message } from "discord.js"
 import { UserID } from "../types/enum/User"
-import ErrorMessage from "../types/enum/ErrorMessage"
-import useGptRepository from "../repository/gpt-repository"
 
 const usePromptService = () => {
-    const gpt = useGptRepository()
 
     const sendHelpCommandsResponse = (message: Message) => {
         message.channel.send(`
@@ -16,37 +13,8 @@ const usePromptService = () => {
         return
     }
 
-    const generateAndSendGPTResponse = async (promptBody: string, message: Message) => {
-        const { fetchGPTResponse } = gpt
-        try {
-            if (message?.reference?.messageId) {
-                const repliedTo = await message.channel.messages.fetch(
-                    message.reference.messageId,
-                )
-
-                if (repliedTo.content) {
-                    promptBody = repliedTo.content + ". " + promptBody
-                }
-            }
-
-            console.log("<!--------- GPT API TRIGGERED --------->")
-            const gptResponse = await fetchGPTResponse(promptBody, message.author.id)
-
-            if (gptResponse) {
-                message.channel.send(gptResponse)
-                return
-            }
-
-            message.channel.send(ErrorMessage.RESPONSE_EMPTY)
-        } catch (error) {
-            console.log(error)
-            message.channel.send(ErrorMessage.RESPONSE_ERROR)
-        }
-    }
-
     return {
         sendHelpCommandsResponse,
-        generateAndSendGPTResponse,
     }
 }
 

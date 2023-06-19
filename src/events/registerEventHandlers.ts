@@ -67,7 +67,7 @@ const registerEventHandlers = (client: Client<boolean>) => {
       return
     }
 
-    handlePrompt(promptBody, message)
+    handlePrompt(prompt, promptBody, message)
   })
 }
 
