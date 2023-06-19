@@ -4,10 +4,12 @@ import doesPromptMatchKeyword from '../helpers/utils/doesPromptMatchKeyword'
 import Command from '../types/enum/Command'
 import usePromptService from '../service/prompt-service'
 import useOpenAiService from "../service/openai-service"
+import useWeatherService from "../service/weather-service"
 
 const handlePrompt = (prompt: string, promptBody: string, message: Message) => {
   const promptService = usePromptService()
   const openAiService = useOpenAiService()
+  const weatherService = useWeatherService()
   
   switch (true) {
       case doesPromptMatchKeyword(promptBody, Command.HELP):
@@ -15,6 +17,9 @@ const handlePrompt = (prompt: string, promptBody: string, message: Message) => {
         break
       case doesPromptMatchKeyword(promptBody, Command.IMAGINE):
         openAiService.generateAndSendImageResponse(prompt, promptBody, message)
+        break
+      case doesPromptMatchKeyword(promptBody, Command.WEATHER):
+        weatherService.retrieveAndSendGlobalWeatherAndTime(message)
         break
       default:
         openAiService.generateAndSendGPTResponse(promptBody, message)
