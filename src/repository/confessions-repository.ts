@@ -24,7 +24,7 @@ const useConfessionsRepository = () => {
         return JSON.parse(myData)
     }
 
-    const postConfession = async (text: any) => {
+    const postConfession = async (text: string) => {
         if (!text) {
             return
         }
