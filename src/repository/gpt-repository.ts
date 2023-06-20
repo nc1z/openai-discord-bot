@@ -1,5 +1,5 @@
 import initAxios from "../clients/axios"
-import ErrorMessage from "../types/enum/ErrorMessage"
+import { ErrorMessage } from "../types/enum/CommonMessages"
 
 const PROMPT_WORD_LIMIT = 1000
 const PROMPT_SHORT_RESPONSE_THRESHOLD = 5

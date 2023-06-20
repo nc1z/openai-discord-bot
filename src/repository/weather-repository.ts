@@ -1,9 +1,9 @@
 import { AxiosResponse } from 'axios'
 import { WeatherResponse } from '../types/interface/WeatherResponse'
+import { ErrorMessage } from '../types/enum/CommonMessages'
 import WeatherData from '../types/interface/WeatherData'
 import initAxios from '../clients/axios'
 import cityList from '../helpers/data/city-list'
-import ErrorMessage from '../types/enum/ErrorMessage'
 
 const useWeatherRepository = () => {
     const { client } = initAxios()

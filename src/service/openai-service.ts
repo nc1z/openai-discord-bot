@@ -1,14 +1,14 @@
 import { AttachmentBuilder, Message } from "discord.js"
-import ErrorMessage from "../types/enum/ErrorMessage"
+import { ErrorMessage } from "../types/enum/CommonMessages"
 import useGptRepository from "../repository/gpt-repository"
 import useDalleRepository from "../repository/dalle-repository"
 
 const useOpenAiService = () => {
-    const gpt = useGptRepository()
-    const dalle = useDalleRepository()
+    const gptRepository = useGptRepository()
+    const dalleRepository = useDalleRepository()
 
     const generateAndSendGPTResponse = async (promptBody: string, message: Message) => {
-        const { fetchGPTResponse } = gpt
+        const { fetchGPTResponse } = gptRepository
         try {
             if (message?.reference?.messageId) {
                 const repliedTo = await message.channel.messages.fetch(
@@ -36,7 +36,7 @@ const useOpenAiService = () => {
     }
 
     const generateAndSendImageResponse = async (prompt: string, promptBody: string, message: Message) => {
-        const { fetchDalleResponse } = dalle
+        const { fetchDalleResponse } = dalleRepository
         
         try {
           message.channel.send("Generating image...")

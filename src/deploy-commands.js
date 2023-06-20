@@ -1,13 +1,13 @@
 /* eslint-disable */
-import { Routes } from 'discord.js'
-import { REST } from '@discordjs/rest'
-import { clientId, guildId, token } from './config.json'
-import fs from 'node:fs'
-import path from 'node:path'
+const { Routes } = require('discord.js')
+const { REST } = require('@discordjs/rest')
+const { clientId, guildId, token } = require('./config.json')
+const fs = require('node:fs')
+const path = require('node:path')
 
 const commands = []
 const commandsPath = path.join(__dirname, 'commands')
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.ts'))
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'))
 
 for (const file of commandFiles) {
 	const command = require(`./commands/${file}`)
@@ -16,10 +16,10 @@ for (const file of commandFiles) {
 
 const rest = new REST({ version: '10' }).setToken(token)
 
-(async () => {
+Promise.resolve()
+.then(async () => {
 	try {
 		console.log(`Started refreshing ${commands.length} application (/) commands.`)
-
 		const data = await rest.put(
 			Routes.applicationGuildCommands(clientId, guildId),
 			{ body: commands },
@@ -29,4 +29,4 @@ const rest = new REST({ version: '10' }).setToken(token)
 	} catch (error) {
 		console.error(error)
 	}
-})()
+}).catch(console.error)

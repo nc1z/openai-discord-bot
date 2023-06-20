@@ -3,10 +3,10 @@ import { getRandomWeatherPendingQuote } from "../helpers/utils/common-messages"
 import useWeatherRepository from "../repository/weather-repository"
 
 const useWeatherService = () => {
-    const weather = useWeatherRepository()
+    const weatherRepository = useWeatherRepository()
 
     const retrieveAndSendGlobalWeatherAndTime = async (message: Message) => {
-        const { fetchWeatherResponse } = weather
+        const { fetchWeatherResponse } = weatherRepository
     
         message.channel.send(getRandomWeatherPendingQuote())
         const weatherResponse = await fetchWeatherResponse()
