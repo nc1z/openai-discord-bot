@@ -5,11 +5,13 @@ import Command from '../types/enum/Command'
 import usePromptService from '../service/prompt-service'
 import useOpenAiService from "../service/openai-service"
 import useWeatherService from "../service/weather-service"
+import useConfessionsService from "../service/confessions-service"
 
 const handlePrompt = (prompt: string, promptBody: string, message: Message) => {
   const promptService = usePromptService()
   const openAiService = useOpenAiService()
   const weatherService = useWeatherService()
+  const confessionsService = useConfessionsService()
   
   switch (true) {
       case doesPromptMatchKeyword(promptBody, Command.HELP):
@@ -20,6 +22,9 @@ const handlePrompt = (prompt: string, promptBody: string, message: Message) => {
         break
       case doesPromptMatchKeyword(promptBody, Command.WEATHER):
         weatherService.retrieveAndSendGlobalWeatherAndTime(message)
+        break
+      case doesPromptMatchKeyword(promptBody, Command.CONFESSIONS):
+        confessionsService.retrieveAndSendConfessions(promptBody, message)
         break
       default:
         openAiService.generateAndSendGPTResponse(promptBody, message)

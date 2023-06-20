@@ -1,5 +1,5 @@
 import { initOpenAI } from '../clients/openAI'
-import ErrorMessage from '../types/enum/ErrorMessage'
+import { ErrorMessage } from '../types/enum/CommonMessages'
 
 const useDalleRepository = () => {
   const openai = initOpenAI()
