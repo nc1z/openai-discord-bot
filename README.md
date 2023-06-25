@@ -13,30 +13,34 @@
     <a href="https://github.com/nc1z/openai-discord-bot">Report Bug</a>
     ·
     <a href="https://github.com/nc1z/openai-discord-bot">Request Feature</a>
+    ·
+    <a href="#usage-guide">Usage Guide</a>
   </p>
 </div>
 
 <hr/>
 
 <!-- ABOUT THE PROJECT -->
-
 ## About The Project
 
+Discord bot template codebase, with examples of event handling and integration with external APIs
 
-
-**Libraries Used:**
-
-
-
-<!-- RELEASE -->
-
-## Release & Updates
 
 <!-- USAGE -->
 
 ## Usage Guide
 
-1. TBD
+1. Run the commands
+    ```
+    $ git clone https://github.com/nc1z/openai-discord-bot.git
+    $ cd ./openai-discord-bot
+    $ npm install
+    ```
+2. Create a `.env` file in the root directory and input secrets. Refer to `.env.example`.
+3. Run the command for development
+    ```
+    npm run start:dev
+    ```
 
 <!-- CONTACT -->
 
