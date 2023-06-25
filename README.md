@@ -25,7 +25,6 @@
 
 Discord bot template codebase, with examples of event handling and integration with external APIs
 
-
 <!-- USAGE -->
 
 ## Usage Guide
@@ -40,6 +39,18 @@ Discord bot template codebase, with examples of event handling and integration w
 3. Run the command for development
     ```
     npm run start:dev
+    ```
+
+## Running with Docker
+
+1. Run the command
+
+    ```bash
+    docker build -t your-project-image-name .
+    ```
+2. Once the image is built, run the command
+    ```bash
+    docker-compose up -d
     ```
 
 <!-- CONTACT -->
