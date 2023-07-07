@@ -38,36 +38,30 @@ const useOpenAiService = () => {
     const generateAndSendImageResponse = async (prompt: string, promptBody: string, message: Message) => {
         const { fetchDalleResponse } = dalleRepository
         
-        try {
-          message.channel.send("Generating image...")
-          const imageUrl = await fetchDalleResponse(prompt)
+        message.channel.send("Generating image...")
+        const imageUrl = await fetchDalleResponse(prompt)
 
-          if (!imageUrl) {
-            throw new Error(ErrorMessage.RESPONSE_EMPTY)
-          }
-          
-          const file = new AttachmentBuilder(imageUrl, { name: 'image.png' })
-          const embedImage = {
-            title: promptBody,
-            image: {
-              url: 'attachment://image.png',
-            },
-          }
-    
-          if (embedImage) {
-            message.channel.send({ 
-              embeds: [embedImage], 
-              files: [file],
-            })
-            return
-          }
-          message.channel.send(ErrorMessage.RESPONSE_EMPTY)
-          return
-        } catch (error) {
-          console.log(error)
-          message.channel.send(ErrorMessage.RESPONSE_ERROR)
+        if (!imageUrl || imageUrl === ErrorMessage.RESPONSE_GENERIC) {
+          throw new Error(ErrorMessage.RESPONSE_EMPTY)
+        }
+        
+        const file = new AttachmentBuilder(imageUrl, { name: 'image.png' })
+        const embedImage = {
+          title: promptBody,
+          image: {
+            url: 'attachment://image.png',
+          },
+        }
+  
+        if (embedImage) {
+          message.channel.send({ 
+            embeds: [embedImage], 
+            files: [file],
+          })
           return
         }
+        message.channel.send(ErrorMessage.RESPONSE_EMPTY)
+        return
     }
 
     return {
